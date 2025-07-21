@@ -45,4 +45,14 @@ public class main {
                 ", Number=" + Number +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Contacto) {
+            Contacto otro = (Contacto) obj;
+            return this.nombre.equalsIgnoreCase(otro.getNombre());
+        }
+        return false;
+    }
+
 }
