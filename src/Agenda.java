@@ -1,5 +1,7 @@
 package src;
 
+import java.util.Arrays;
+
 public class Agenda {
     public boolean existeContacto(Contacto contacto) {
         for (Contacto contactoRegistrado : contactos) {
@@ -14,7 +16,7 @@ public class Agenda {
         for (int i = 0; i < contactos.length; i++) {
             if(contactos[i] != null && contactos[i].equals(contacto)){
                 contactos[i] = null;
-                System.out.println("Contacto: " + contacto.getFirstName() + contacto.getSecondName() + " fue eliminado con éxito");
+                System.out.println("Contacto: " + contacto.getFirstName() + " " + contacto.getSecondName() + " fue eliminado con éxito");
                 return true;
             }
         }
@@ -22,9 +24,9 @@ public class Agenda {
         return false;
     }
 
-    public void buscarContacto(String nombre){
+    public void buscarContacto(String nombre, String apellido){
         for (Contacto contactoRegistrado : contactos) {
-            if(contactoRegistrado != null && contactoRegistrado.getNombre().equalsIgnoreCase(nombre)){
+            if(contactoRegistrado != null && contactoRegistrado.getFirstName().equalsIgnoreCase(nombre) && contactoRegistrado.getSecondName().equalsIgnoreCase(apellido)){
                 System.out.println("Teléfono: " + contactoRegistrado.getNumber());
                 return;
             }
@@ -33,10 +35,11 @@ public class Agenda {
     }
 
     public void listarContactos(){
+        Arrays.sort(contactos, new ContactoComparator());
         System.out.println("Lista de contactos");
         for (Contacto contactoRegistrado : contactos) {
             if (contactoRegistrado != null) {
-                System.out.println(contactoRegistrado);
+                System.out.println(contactoRegistrado.getFirstName() + " " + contactoRegistrado.getSecondName() + " - " + contactoRegistrado.getNumber());
             }
         }
     }
