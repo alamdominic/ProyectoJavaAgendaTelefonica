@@ -1,4 +1,5 @@
 package src;
+
 import java.util.Scanner;
 
 public class AgendaAPP {
@@ -23,13 +24,31 @@ public class AgendaAPP {
 
             switch (opcion) {
                 case 1:
+
                     System.out.print("Nombre: ");
                     String nombre = sc.nextLine();
                     System.out.print("Apellido: ");
                     String apellido = sc.nextLine();
-                    System.out.print("Teléfono: ");
-                    String telefono = sc.nextLine();
-                    agenda.añadirContacto(new Contacto(nombre, apellido, telefono));
+                    String telefono;
+                    boolean telefonoValido = false;
+
+                    do {
+                        System.out.print("Teléfono: ");
+                        telefono = sc.nextLine();
+
+                        try {
+                            if (!telefono.matches("\\d{10}")) {
+                                throw new IllegalArgumentException(
+                                        "El número debe tener exactamente 10 dígitos numéricos.");
+                            }
+                            telefonoValido = true; // El número es válido, salimos del ciclo
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("❌ Error: " + e.getMessage());
+                        }
+
+                    } while (!telefonoValido);
+
+                    agenda.añadirContacto(new Contacto(nombre.toLowerCase(), apellido.toLowerCase(), telefono));
                     break;
                 case 2:
                     System.out.print("Nombre: ");
