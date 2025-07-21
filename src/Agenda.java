@@ -1,5 +1,4 @@
 package src;
-import javax.naming.ldap.ControlFactory;
 
 public class Agenda {
     public boolean existeContacto(Contacto contacto) {
