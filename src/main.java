@@ -1,3 +1,4 @@
+package src;
 public class main {
     private String FirstName;
     private String SecondName;
