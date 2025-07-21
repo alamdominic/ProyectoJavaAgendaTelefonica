@@ -3,6 +3,51 @@ package src;
 import java.util.Arrays;
 
 public class Agenda {
+    private Contacto[] contactos;
+    private int capacidad;
+    public Agenda() {
+        this(10);
+    }
+
+    public Agenda(int capacidad) {
+        this.capacidad = capacidad;
+        this.contactos = new Contacto[capacidad];
+    }
+
+    public boolean añadirContacto(Contacto c) {
+        if (agendaLlena()) {
+            System.out.println("La agenda está llena.");
+            return false;
+        }
+
+        if (existeContacto(c)) {
+            System.out.println("Este contacto ya existe.");
+            return false;
+        }
+
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                contactos[i] = c;
+                System.out.println("Contacto añadido.");
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean agendaLlena() {
+        return espaciosLibres() == 0;
+    }
+    public int espaciosLibres() {
+        int libres = 0;
+        for (Contacto contacto : contactos) {
+            if (contacto == null) {
+                libres++;
+            }
+        }
+        return libres;
+    }
+
+
     public boolean existeContacto(Contacto contacto) {
         for (Contacto contactoRegistrado : contactos) {
             if (contactoRegistrado != null && contactoRegistrado.equals(contacto)) {
@@ -43,6 +88,4 @@ public class Agenda {
             }
         }
     }
-
-
 }
