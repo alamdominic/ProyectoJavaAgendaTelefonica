@@ -80,7 +80,11 @@ public class Agenda {
     }
 
     public void listarContactos(){
-        Arrays.sort(contactos, new ContactoComparator());
+        if (espaciosLibres() == contactos.length) {
+            System.out.println("No hay contactos actualmente");
+            return;
+        }
+        Arrays.sort(contactos, new ContactoComparator());        
         System.out.println("Lista de contactos");
         for (Contacto contactoRegistrado : contactos) {
             if (contactoRegistrado != null) {
