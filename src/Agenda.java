@@ -2,18 +2,23 @@ package src;
 
 import java.util.Arrays;
 
+// Clase que representa una agenda de contactos
 public class Agenda {
-    private Contacto[] contactos;
-    private int capacidad;
+    private Contacto[] contactos;  // Arreglo de contactos
+    private int capacidad;         // Capacidad máxima de la agenda
+
+    // Constructor por defecto: agenda de 10 contactos
     public Agenda() {
         this(10);
     }
 
+    // Constructor con capacidad personalizada
     public Agenda(int capacidad) {
         this.capacidad = capacidad;
         this.contactos = new Contacto[capacidad];
     }
 
+    // Método para añadir un nuevo contacto a la agenda
     public boolean añadirContacto(Contacto c) {
         if (agendaLlena()) {
             System.out.println("La agenda está llena.");
@@ -34,9 +39,13 @@ public class Agenda {
         }
         return false;
     }
+
+    // Verifica si la agenda está llena
     public boolean agendaLlena() {
         return espaciosLibres() == 0;
     }
+
+    // Cuenta cuántos espacios libres hay
     public int espaciosLibres() {
         int libres = 0;
         for (Contacto contacto : contactos) {
@@ -47,7 +56,7 @@ public class Agenda {
         return libres;
     }
 
-
+    // Verifica si el contacto ya está en la agenda
     public boolean existeContacto(Contacto contacto) {
         for (Contacto contactoRegistrado : contactos) {
             if (contactoRegistrado != null && contactoRegistrado.equals(contacto)) {
@@ -57,6 +66,7 @@ public class Agenda {
         return false;
     }
 
+    // Elimina un contacto existente
     public boolean eliminarContacto(Contacto contacto) {
         for (int i = 0; i < contactos.length; i++) {
             if(contactos[i] != null && contactos[i].equals(contacto)){
@@ -69,6 +79,7 @@ public class Agenda {
         return false;
     }
 
+    // Busca y muestra el teléfono de un contacto específico
     public void buscarContacto(String nombre, String apellido){
         for (Contacto contactoRegistrado : contactos) {
             if(contactoRegistrado != null && contactoRegistrado.getFirstName().equalsIgnoreCase(nombre) && contactoRegistrado.getSecondName().equalsIgnoreCase(apellido)){
@@ -79,6 +90,7 @@ public class Agenda {
         System.out.println("Contacto no encontrado");
     }
 
+    // Muestra todos los contactos ordenados
     public void listarContactos(){
         if (espaciosLibres() == contactos.length) {
             System.out.println("No hay contactos actualmente");
